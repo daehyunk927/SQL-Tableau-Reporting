@@ -27,25 +27,3 @@ having count(*) > 500
 order by state, ct desc, l.mlsid, m.short_name_display
 
 
-select name, name_display, UPPER(short_name_display), * from wrd.mls limit 10
-select * from wrd.listing limit 10
-select abbreviation, count(*) from sas.statelookup group by abbreviation order by abbreviation
-select * from sas.statelookup where abbreviation in ('CA','HI','NL')
-
-SELECT short_name_display, * from wrd.mls where abbreviation in ('CAA')
-
---
-select count(*) from wrd.listing
-WHERE propertytypeid != 6 -- Exclude Rentals
-   and sourcetableid = 3 -- Extract only from MLS data
-   and mlsid not in (174) -- Exclude TDX, since it shows duplicate listings with TRD
-   and datelisted > '2016-12-31' and datelisted < '2018-01-01'
-
-select count(*) from wrd.listing
-WHERE propertytypeid != 6 -- Exclude Rentals
-   and propertytypeid != 3 -- Exclude Lands
-   and sourcetableid = 3 -- Extract only from MLS data
-   and mlsid not in (174) -- Exclude TDX, since it shows duplicate listings with TRD
-   and solddate > '2016-12-31' and solddate < '2018-01-01'
-   and listingstatusid in (23,24) --Closed Listings Only
-   and solddate is not null 
